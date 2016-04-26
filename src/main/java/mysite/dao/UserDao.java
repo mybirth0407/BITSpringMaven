@@ -20,7 +20,6 @@ public class UserDao {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        System.out.println("get: " + email);
         try {
             conn = dbConnection.getConnection();
             String sql = "select no, email " +
@@ -35,7 +34,6 @@ public class UserDao {
                 userVo.setNo(rs.getLong(1));
                 userVo.setEmail(rs.getString(2));
             }
-            System.out.println("userVo" + userVo);
             return userVo;
         }
         catch (SQLException e) {

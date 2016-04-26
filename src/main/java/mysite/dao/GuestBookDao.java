@@ -1,6 +1,7 @@
 package mysite.dao;
 
 import mysite.db.DBConnection;
+import mysite.exception.GuestBookGetListException;
 import mysite.vo.GuestBookVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -224,7 +225,7 @@ public class GuestBookDao {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            throw new GuestBookGetListException();
         }
         finally {
             try {
@@ -241,7 +242,7 @@ public class GuestBookDao {
                 }
             }
             catch (SQLException e) {
-                e.printStackTrace();
+                throw new GuestBookGetListException();
             }
         }
         return list;

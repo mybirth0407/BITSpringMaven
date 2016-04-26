@@ -2,17 +2,17 @@ package mysite.dao;
 
 import mysite.db.DBConnection;
 import mysite.vo.BoardVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class BoardDao {
+    @Autowired
     private DBConnection dbConnection;
-
-    public BoardDao(DBConnection dbConnection) {
-        this.dbConnection = dbConnection;
-    }
 
     public BoardVo get(Long boardNo) {
         BoardVo boardVo = new BoardVo();

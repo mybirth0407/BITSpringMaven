@@ -12,9 +12,8 @@
   <c:import url="/WEB-INF/mysite/views/include/header.jsp"/>
   <div id="message">
     <div id="guestbook" class="delete-form">
-      <form method="post" action="/guestbook">
-        <input type="hidden" name="a" value="delete">
-        <input type='hidden' name="no" value="">
+      <form method="post" action="/mysite/guestbook/delete">
+        <input type="hidden" name="no" value=${no}>
         <label>비밀번호</label>
         <input type="password" name="passwd">
         <input type="submit" value="확인">

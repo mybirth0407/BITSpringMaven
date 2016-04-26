@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <% pageContext.setAttribute("newLine", "\r\n"); %>
@@ -15,8 +14,7 @@
   <c:import url="/WEB-INF/mysite/views/include/header.jsp"/>
   <div id="content">
     <div id="guestbook">
-      <form action="/mysite/guestbook" method="post">
-        <input type="hidden" name="a" value="insert">
+      <form action="/mysite/guestbook/insert" method="post">
         <table>
           <tr>
             <td>이름</td>
@@ -46,7 +44,7 @@
               <td>${guestBookVo.name}</td>
               <td>${guestBookVo.regDate}</td>
               <td><a href=
-                       "/guestbook/delete?no=${guestBookVo.no}">
+                       "/mysite/guestbook/deleteform/${guestBookVo.no}">
                 삭제</a></td>
             </tr>
             <tr>

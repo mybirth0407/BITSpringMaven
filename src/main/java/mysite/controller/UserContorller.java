@@ -39,13 +39,12 @@ public class UserContorller {
     }
 
     @RequestMapping("/login")
-    public String login(@ModelAttribute UserVo vo, HttpSession session) {
+    public String login(@ModelAttribute UserVo vo, HttpSession httpsession) {
         UserVo userVo = userService.login(vo);
-
         if (userVo == null) {
             return "user/loginform_fail";
         }
-        session.setAttribute("authUser", userVo);
+        httpsession.setAttribute("authUser", userVo);
         return "redirect:/mysite/main";
     }
 
@@ -66,7 +65,6 @@ public class UserContorller {
     public Map<String, Object> checkEmail(
         @RequestParam(value = "email", required = true, defaultValue = "")
             String email) {
-        System.out.println("ASDF" + email);
         UserVo userVo = userService.getUser(email);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("result", "success");
