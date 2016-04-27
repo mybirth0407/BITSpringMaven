@@ -35,7 +35,7 @@ public class GuestBookController {
         return "guestbook/deleteform";
     }
 
-    @RequestMapping(value = "/delete")
+    @RequestMapping("/delete")
     public String delete(@ModelAttribute GuestBookVo guestBookVo) {
 //        System.out.println(no);
 //        GuestBookVo guestBookVo = guestBookService.get(no);

@@ -28,4 +28,5 @@ public class GuestBookService {
     public GuestBookVo get(Long no) {
         return guestBookDao.get(no);
     }
+
 }

@@ -200,6 +200,7 @@ public class UserDao {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
+        System.out.println(userVo);
         try {
             conn = dbConnection.getConnection();
             if ("".equals(userVo.getPasswd())) {
@@ -227,7 +228,7 @@ public class UserDao {
 
         }
         catch (SQLException e) {
-            System.out.println("error:" + e);
+            e.printStackTrace();
         }
         finally {
             try {

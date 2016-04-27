@@ -4,6 +4,7 @@ import mysite.service.UserService;
 import mysite.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -71,6 +72,29 @@ public class UserContorller {
         map.put("data", userVo == null);
 
         return map;
+    }
+
+    @RequestMapping("/modifyform")
+    public String modifyform(Model model, HttpSession httpSession) {
+        UserVo authUser = (UserVo) httpSession.getAttribute("authUser");
+        if (authUser == null) {
+            return "redirect:/mysite/main";
+        }
+        model.addAttribute("userVo", userService.getUser(authUser.getNo()));
+        return "user/modifyform";
+    }
+
+    @RequestMapping("/modify")
+    public String modify(
+        @ModelAttribute UserVo userVo, HttpSession httpSession) {
+        UserVo authUser = (UserVo) httpSession.getAttribute("authUser");
+        if (authUser == null) {
+            return "redirect:/mysite/main";
+        }
+
+        userVo.setNo((authUser.getNo()));
+        userService.modify(userVo);
+        return "user/modifyform_success";
     }
 
     @RequestMapping("/hello")

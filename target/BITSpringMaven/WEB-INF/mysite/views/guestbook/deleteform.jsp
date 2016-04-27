@@ -18,7 +18,8 @@
         <input type="password" name="passwd">
         <input type="submit" value="확인">
       </form>
-      <a href="">방명록 리스트</a>
+      <a href="${pageContext.request.contextPath}/mysite/guestbook">
+        방명록 리스트</a>
     </div>
   </div>
   <c:import url="/WEB-INF/mysite/views/include/navigation.jsp"/>

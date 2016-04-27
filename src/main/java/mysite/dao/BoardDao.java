@@ -19,7 +19,6 @@ public class BoardDao {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
         try {
             conn = dbConnection.getConnection();
             String sql = "select * " +
@@ -127,7 +126,7 @@ public class BoardDao {
         }
     }
 
-    public void refreshViewCount(Long no) {
+    public void viewCountIncrease(Long no) {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -175,6 +174,7 @@ public class BoardDao {
 
             pstmt.setString(1, boardVo.getTitle());
             pstmt.setString(2, boardVo.getContent());
+            System.out.println(boardVo);
             pstmt.setLong(3, boardVo.getUserNo());
 
             pstmt.executeUpdate();
