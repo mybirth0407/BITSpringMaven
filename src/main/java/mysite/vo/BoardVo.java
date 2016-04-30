@@ -38,8 +38,8 @@ public class BoardVo {
 
     public String getRegDate() {
         return regDate;
-    }
 
+    }
     public String getUserName() {
         return userName;
     }

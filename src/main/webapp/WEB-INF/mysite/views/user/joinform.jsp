@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -14,7 +15,7 @@
           src="/assets/js/jquery/jquery-1.9.0.js"></script>
   <script type="text/javascript">
     $(function() {
-      $("#join-form").submit(function() {
+      $("#join-form2").submit(function() {
         /* 이름 유효성 검사 */
         if ($("#name").val() == "") {
           alert("이름은 필수 요소다!");
@@ -52,9 +53,8 @@
         }
         console.log(email);
         $.ajax({
-          url:
-          "${pageContext.request.contextPath}/mysite/user/checkemail?email=" +
-            email, // 요청 URL
+          url: "${pageContext.request.contextPath}/mysite/user/checkemail?email=" +
+          email, // 요청 URL
           type: "get", // 통신방식 get/post 둘중 하나
           dataType: "json", //  수신 데이터 타입
           data: "", //post방식인 경우 서버에 전달할 파라미터 데이터
@@ -97,12 +97,33 @@
             action="/mysite/user/join">
         <label class="block-label" for="name">이름</label>
         <input id="name" name="name" type="text" value="">
+        <spring:hasBindErrors name="userVo">
+          <c:if test="${errors.hasFieldErrors('name')}">
+            <br>
+            <strong style="color:orangered">
+                ${errors.getFieldError('name').defaultMessage}
+            </strong>
+          </c:if>
+        </spring:hasBindErrors>
 
         <label class="block-label" for="email">이메일</label>
         <input id="email" name="email" type="text" value="">
         <input id="btn-checkemail" type="button" value="id 중복체크">
         <img id="img-checkemail" style="display:none;"
              src="${pageContext.request.contextPath}/assets/images/check.png">
+        <spring:hasBindErrors name="userVo">
+          <c:if test="${errors.hasFieldErrors('email')}">
+            <br>
+            <strong style="color:cadetblue">
+                <%--${errors.getFieldError('email')}<br>--%>
+              <c:set var="errorEmail"
+                     value="${errors.getFieldError('email').codes[0]}"/>
+              <spring:message
+                code="${errorEmail}"
+                text="${errors.getFieldError('email').defaultMessage}"/>
+            </strong>
+          </c:if>
+        </spring:hasBindErrors>
 
         <label class="block-label">패스워드</label>
         <input name="passwd" type="password" value="">

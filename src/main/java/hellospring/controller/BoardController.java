@@ -22,7 +22,6 @@ public class BoardController {
     @ResponseBody
     public String delete(
         @RequestParam(value = "no", required = false) Long no) {
-        System.out.println(no);
         return "BoardController.delete()";
     }
 

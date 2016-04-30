@@ -14,12 +14,12 @@
     <ul>
       <c:choose>
         <c:when test="${empty authUser}">
-          <li><a href="/user?a=loginform">로그인</a></li>
-          <li><a href="/user?a=joinform">회원 가입</a></li>
+          <li><a href="/mysite/user/loginform">로그인</a></li>
+          <li><a href="/mysite/user/joinform">회원 가입</a></li>
         </c:when>
         <c:otherwise>
-          <li><a href="/user?a=modifyform">회원정보 수정</a></li>
-          <li><a href="/user?a=logout">로그아웃</a></li>
+          <li><a href="/mysite/user/modifyform">회원정보 수정</a></li>
+          <li><a href="/mysite/user/logout">로그아웃</a></li>
           <li>${authUser.name} 접속했다!</li>
         </c:otherwise>
       </c:choose>
@@ -28,8 +28,8 @@
   <div id="content">
     <div id="board">
       <form class="board-form" method="post"
-            action="/board?a=modify&no=${boardVo.no}">
-        <%--<input type="hidden" name="no" value="${boardVo.no}">--%>
+            action="/mysite/board/modify">
+        <input type="hidden" name="no" value="${boardVo.no}">
         <table class="tbl-ex">
           <tr>
             <th colspan="2">글수정</th>
@@ -42,13 +42,13 @@
           <tr>
             <td class="label">내용</td>
             <td>
-              <textarea id="content"
+              <textarea id="message"
                         name="content">${boardVo.content}</textarea>
             </td>
           </tr>
         </table>
         <div class="bottom">
-          <a href="/board?a=view&no=${boardVo.no}">취소</a>
+          <a href="/mysite/board/view/${boardVo.no}">취소</a>
           <input type="submit" value="수정">
         </div>
       </form>

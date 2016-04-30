@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-`
+
 <%
   pageContext.setAttribute("newLine", "\r\n");
 %>
@@ -35,12 +35,13 @@
         </tr>
       </table>
       <div class="bottom">
-        <a href="/board">글목록</a>
+        <a href=
+             "${pageContext.request.contextPath}/mysite/board?">글목록</a>
         <c:choose>
           <c:when test="${empty authUser}"></c:when>
           <c:otherwise>
-            <a href="/board?a=modifyform&no=${boardVo.no}">글수정</a>
-            <a href="/board?a=replyform&no=${boardVo.no}">답글</a>
+            <a href="/mysite/board/modifyform/${boardVo.no}">글수정</a>
+            <a href="/mysite/board/replyform/${boardVo.no}">답글</a>
           </c:otherwise>
         </c:choose>
       </div>

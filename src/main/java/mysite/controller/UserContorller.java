@@ -5,10 +5,14 @@ import mysite.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,7 +29,20 @@ public class UserContorller {
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String join(@ModelAttribute UserVo uservo) {
+    public String join(
+        @Valid @ModelAttribute UserVo userVo,
+        BindingResult bindingResult,
+        Model model) {
+        if (bindingResult.hasErrors()) {
+//            List<ObjectError> list = bindingResult.getAllErrors();
+//            for (ObjectError objectError: list) {
+//                System.out.println(objectError);
+//            }
+            model.addAllAttributes(bindingResult.getModel());
+            return "user/joinform";
+        }
+//        return "validation";
+        userService.join(userVo);
         return "redirect:/mysite/user/joinsuccess";
     }
 
@@ -57,7 +74,6 @@ public class UserContorller {
             session.removeAttribute("authUser");
             session.invalidate();
         }
-
         return "redirect:/mysite/main";
     }
 
@@ -97,9 +113,9 @@ public class UserContorller {
         return "user/modifyform_success";
     }
 
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "mysite/hello:안녕";
-    }
+//    @RequestMapping("/hello")
+//    @ResponseBody
+//    public String hello() {
+//        return "mysite/hello:안녕";
+//    }
 }

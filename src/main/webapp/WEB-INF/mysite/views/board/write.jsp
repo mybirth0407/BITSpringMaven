@@ -12,8 +12,8 @@
   <c:import url="/WEB-INF/mysite/views/include/header.jsp"/>
   <div id="content">
     <div id="board">
-      <form class="board-form" method="post" action="/board">
-        <input type="hidden" name="a" value="write">
+      <form class="board-form" method="post"
+            action="/mysite/board/write">
         <table class="tbl-ex">
           <tr>
             <th colspan="2">글쓰기</th>
@@ -25,12 +25,12 @@
           <tr>
             <td class="label">내용</td>
             <td>
-              <textarea id="content" name="content"></textarea>
+              <textarea id="message" name="content"></textarea>
             </td>
           </tr>
         </table>
         <div class="bottom">
-          <a href="/board">취소</a>
+          <a href="/mysite/board">취소</a>
           <input type="submit" value="등록">
         </div>
       </form>

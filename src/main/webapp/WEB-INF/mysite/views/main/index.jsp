@@ -16,12 +16,10 @@
       <div id="site-introduction">
         <img id="profile"
              src="https://i.ytimg.com/vi/oa934JAFYB8/hqdefault.jpg">
-        <h2>홍대와 건대 사이!</h2>
-        <p>
-          건대 호수 홍대 놀이터 난 어디든 좋아<br>
-          네가 있다면 난 어디든 좋아<br>
-          웃는 모습 우는 모습 모두 사랑해 줄게<br>
-          네가 있다면 난 어디든 좋아<br><br>
+        <h2>끄아아아까ㅏㅇ깡깎</h2>
+        <p>퓨처스<br>
+          지옥<br>
+          번개<br>
           <a href="/guestbook">방명록</a>에 글 남기기<br>
         </p>
       </div>

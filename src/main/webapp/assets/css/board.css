@@ -82,6 +82,14 @@ input#keyword {
   outline: none;
 }
 
+.board-form .tbl-ex textarea#message {
+  width: 470px;
+  height: 200px;
+  padding: 10px;
+  resize: none;
+  outline: none;
+}
+
 .board-form select {
   padding: 5px;
 }

@@ -17,16 +17,28 @@ public class GuestBookService {
         return guestBookDao.getList();
     }
 
-    public void insert(GuestBookVo guestBookVo) {
-        guestBookDao.insert(guestBookVo);
+    public List<GuestBookVo> getList(Long page) {
+        System.out.println(guestBookDao.getList(page));
+        return guestBookDao.getList(page);
     }
 
-    public void delete(GuestBookVo guestBookVo) {
-        guestBookDao.delete(guestBookVo.getNo(), guestBookVo.getPasswd());
+    public GuestBookVo insert(GuestBookVo guestBookVo) {
+        Long no = guestBookDao.insert(guestBookVo);
+        GuestBookVo retGuestVo = guestBookDao.get(no);
+        return retGuestVo;
+    }
+
+    public boolean delete(GuestBookVo guestBookVo) {
+        boolean ret = true;
+        System.out.println(guestBookVo);
+        if (guestBookDao.delete(
+            guestBookVo.getNo(), guestBookVo.getPasswd()) == 0) {
+            ret = false;
+        }
+        return ret;
     }
 
     public GuestBookVo get(Long no) {
         return guestBookDao.get(no);
     }
-
 }

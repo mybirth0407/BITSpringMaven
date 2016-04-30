@@ -12,9 +12,11 @@
   <c:import url="/WEB-INF/mysite/views/include/header.jsp"/>
   <div id="content">
     <div id="board">
-      <form class="board-form" method="post" action="/board">
-        <input type="hidden" name="a" value="reply">
-        <input type="hidden" name="no" value="${boardVo.no}">
+      <form class="board-form" method="post"
+            action="/mysite/board/reply">
+        <input type="hidden" name="groupNo" value="${boardVo.groupNo}">
+        <input type="hidden" name="orderNo" value="${boardVo.orderNo}">
+        <input type="hidden" name="depth" value="${boardVo.depth}">
         <table class="tbl-ex">
           <tr>
             <th colspan="2">답글</th>
@@ -27,7 +29,7 @@
           <tr>
             <td class="label">내용</td>
             <td>
-              <textarea id="content"
+              <textarea id="message"
                         name="content">${boardVo.content}
 --------------------------------------------------------
 re: </textarea>
@@ -35,7 +37,7 @@ re: </textarea>
           </tr>
         </table>
         <div class="bottom">
-          <a href="/board?a=view&no=${boardVo.no}">취소</a>
+          <a href="/mysite/board/view/${boardVo.no}">취소</a>
           <input type="submit" value="등록">
         </div>
       </form>

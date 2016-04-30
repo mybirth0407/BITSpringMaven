@@ -20,7 +20,7 @@
 
     var fetchList = function() {
       $.ajax({
-        url: "guestbook?a=ajax-list&page=" + page,
+        url: "/mysite/guestbook/ajax-list/" + page,
         type: "get",
         dataType: "json",
         data: "",
@@ -66,7 +66,6 @@
         "<td colspan='3'>" +
         guestBookVo.message.replace(/\r\n/g, "<br>") +
         "</td></tr></table></li>";
-
 //      $("#gb-list").append(html);
       return html;
     }
@@ -74,21 +73,20 @@
     /* 데이터 삽입 */
     $(function() {
       $("#form-insert").submit(function(event) {
-        event.preventDefault();
-
         var name = $("#name").val();
         var passwd = $("#passwd").val();
         var message = $("#message").val();
 
         this.reset();
+        event.preventDefault();
 
         $.ajax({
-          url: "guestbook",
+          url: "/mysite/guestbook/ajax-insert",
           type: "post",
-          data: "a=ajax-insert" +
-          "&name=" + name +
+          data: "name=" + name +
           "&passwd=" + passwd +
           "&message=" + message,
+          dataType: "json",
 
           success: function(response) {
             console.log(response.data);
@@ -114,7 +112,6 @@
         $("#del-no").val(no);
         console.log(no);
         dialogDelete.dialog("open");
-
       });
 
       $(window).scroll(function() {
@@ -140,16 +137,16 @@
             console.log("clicked: " + no + ", " + delPasswd);
 
             $.ajax({
-              url: "guestbook",
+              url: "/mysite/guestbook/ajax-delete",
               type: "post",
-              data: "a=ajax-delete" +
-              "&no=" + no +
+              data: "no=" + no +
               "&passwd=" + delPasswd,
 
               success: function(response) {
                 console.log(response.data);
 //                $("#gb-list").(renderHtml(response.data));
 //                $("#gb-list").remove();
+                $("#li-" + no).remove();
                 dialogDelete.dialog("close");
               },
 
@@ -163,7 +160,6 @@
           }
         },
         close: function() {
-
         }
       });
 
@@ -204,7 +200,7 @@
   <c:import url="/WEB-INF/mysite/views/include/navigation.jsp"/>
   <c:import url="/WEB-INF/mysite/views/include/footer.jsp"/>
   <%--<div id="dialogMessage" title="끼야아앆">--%>
-    <%--<p style="line-height: 50px">ㅇㅋㅇㅋ</p>--%>
+  <%--<p style="line-height: 50px">ㅇㅋㅇㅋ</p>--%>
   <%--</div>--%>
   <div id="dialog-form" title="끼야아앆">
     <p class="validateTips">예~</p>

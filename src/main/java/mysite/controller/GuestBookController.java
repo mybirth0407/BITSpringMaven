@@ -8,8 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/mysite/guestbook")
@@ -17,10 +20,44 @@ public class GuestBookController {
     @Autowired
     private GuestBookService guestBookService;
 
+    @RequestMapping("/ajax")
+    public String ajaxMain() {
+        return "guestbook/ajax-main";
+    }
+
     @RequestMapping(value = {"", "/list"})
     public String list(Model model) throws SQLException {
         model.addAttribute("list", guestBookService.getList());
         return "guestbook/list";
+    }
+
+    @RequestMapping("/ajax-list/{page}")
+    @ResponseBody
+    public Map<String, Object> ajaxList(@PathVariable("page") Long page) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", "success");
+        map.put("data", guestBookService.getList(page));
+        return map;
+    }
+
+    @RequestMapping("/ajax-insert")
+    @ResponseBody
+    public Map<String, Object> ajaxInsert(
+        @ModelAttribute GuestBookVo guestBookVo) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", "success");
+        map.put("data", guestBookService.insert(guestBookVo));
+        return map;
+    }
+
+    @RequestMapping("/ajax-delete")
+    @ResponseBody
+    public Map<String, Object> ajaxDelete(
+        @ModelAttribute GuestBookVo guestBookVo) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", "success");
+        map.put("data", guestBookService.delete(guestBookVo));
+        return map;
     }
 
     @RequestMapping("/insert")

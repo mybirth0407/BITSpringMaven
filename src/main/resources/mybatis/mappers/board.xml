@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+  <select id="selectByNo" parameterType="long" resultType="boardvo" >
+    <![CDATA[
+      select no, title, content,
+        reg_date as regDate, user_no as userNo,
+        group_no as groupNo, order_no as orderNo,
+        depth, view_count as viewCount
+      from board b
+      where b.no = #{no};
+    ]]>
+  </select>
+
+  <select id="refreshOrderSelect" parameterType="map" resultType="map" >
+    <![CDATA[
+      select no, order_no
+      from board
+      where group_no = #{groupNo}
+        and order_no >= #{ordreNo};
+    ]]>
+  </select>
+
+  <update id="refreshOrderUpdate" parameterType="map">
+    <![CDATA[
+      update board
+      set order_no = #{orderNo}
+      where no = #{no};
+    ]]>
+  </update>
+
+  <update id="viewCountIncrease" parameterType="long">
+    <![CDATA[
+      update board
+      set view_count = view_count + 1
+      where no = #{no};
+    ]]>
+  </update>
+
+  <insert id="write" parameterType="boardvo">
+    <![CDATA[
+      insert into board
+      values(null, #{title}, #{content}, now(), #{userNo},
+        (select ifnull(max(group_no), 0) + 1 from board b), 1, 0, 0);
+    ]]>
+  </insert>
+
+  <delete id="delete" parameterType="long">
+    <![CDATA[
+      delete from board
+      where no = {no};
+    ]]>
+  </delete>
+
+  <update id="modify" parameterType="boardvo">
+    <![CDATA[
+      update board
+      set title=#{title}, content=#{content}, reg_date=now()
+      where no = #{no};
+    ]]>
+  </update>
+
+  <insert id="reply" parameterType="boardvo">
+    <![CDATA[
+      insert into board
+      values(null, #{title}, #{content}, now(), #{userNo},
+        #{groupNo}, #{orderNo}, #{depth}, 0)
+    ]]>
+  </insert>
+
+  <select id="getList" resultType="boardvo">
+    <![CDATA[
+      select b.no, b.user_no, b.title, b.content, b.reg_date, b.group_no,
+        b.order_no, b.depth, b.view_count, u.name
+      from board b, user u
+      where b.user_no = u.no
+      order by b.group_no desc, b.order_no asc;
+    ]]>
+  </select>
+
+  <select id="pageGetListKeywordExist"
+          parameterType="map"
+          resultType="boardvo">
+    <![CDATA[
+      select b.no, b.title, u.no as user_no, u.name,
+        b.view_count, b.reg_date, b.depth
+      from board b, user u
+      where b.user_no = u.no
+      order by b.group_no desc, b.order_no asc
+      limit #{page}, #{N_LIST};
+    ]]>
+  </select>
+
+  <select id="pageGetListKeywordNotExist"
+          parameterType="map"
+          resultType="boardvo">
+    <![CDATA[
+      select distinct b.no, b.title, u.no as userNo, u.name as userName,
+        b.view_count as viewCount, b.reg_date as regDate,
+        b.depth, b.group_no as groupNo, b.order_no as orderNo
+      from board b, user u
+      where b.user_no = u.no
+        and (title like '%${keyword}%' or content like '%${keyword}$%')
+      order by b.group_no desc, b.order_no asc
+      limit #{page}, #{N_LIST};
+    ]]>
+  </select>
+
+  <select id="searchCountKeywordExist"
+          parameterType="string"
+          resultType="long">
+    <![CDATA[
+      select count(*)
+      where title like '%${keyword}%' or content like '%${keyword}%';
+    ]]>
+  </select>
+
+  <select id="searchCountKeywordNotExist"
+          resultType="long">
+    <![CDATA[
+      select count(*)
+      from board;
+    ]]>
+  </select>
+</mapper>
+

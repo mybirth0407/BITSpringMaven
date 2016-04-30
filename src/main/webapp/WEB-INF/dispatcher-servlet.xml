@@ -61,4 +61,42 @@
 
   <context:component-scan
       base-package="mysite"/>
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/mysite/board/**"/>
+      <bean class="mysite.interceptor.MyInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/mysite/guestbook/**"/>
+      <bean class="mysite.interceptor.MyInterceptor2"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/mysite/user/login"/>
+      <bean class="mysite.interceptor.AuthLoginInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/mysite/user/logout"/>
+      <bean class="mysite.interceptor.AuthLogoutInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
+  <bean id="messageSource"
+    class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>messages.messages</value>
+      </list>
+    </property>
+
+  </bean>
 </beans>

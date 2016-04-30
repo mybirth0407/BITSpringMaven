@@ -4,6 +4,7 @@
   <ul>
     <li class="selected"><a href="/mysite/main">ㅇㅇ</a></li>
     <li><a href="/mysite/guestbook">방명록</a></li>
+    <li><a href="/mysite/guestbook/ajax">아작스!</a></li>
     <li><a href="/mysite/board">게시판</a></li>
   </ul>
 </div>
