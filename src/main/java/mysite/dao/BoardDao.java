@@ -1,8 +1,7 @@
 package mysite.dao;
 
-import mysite.config.Config;
-import mysite.db.DBConnection;
 import mysite.vo.BoardVo;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static mysite.config.Config.N_LIST;
 
 @Repository
 public class BoardDao {
@@ -62,11 +63,11 @@ public class BoardDao {
     }
 
     public List<BoardVo> pageGetList(String keyword, long page) {
-        Long p = (page - 1) * Config.N_LIST;
+        Long p = (page - 1) * N_LIST;
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("keyword", keyword);
         map.put("page", p);
-        map.put("N_LIST", Config.N_LIST);
+        map.put("N_LIST", N_LIST);
 
         List<BoardVo> list;
         if ("".equals(keyword) || keyword == null) {

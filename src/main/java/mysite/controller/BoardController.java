@@ -1,5 +1,6 @@
 package mysite.controller;
 
+import mysite.annotation.Auth;
 import mysite.service.BoardService;
 import mysite.vo.BoardVo;
 import mysite.vo.UserVo;

@@ -18,7 +18,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/mysite/user")
 public class UserContorller {
-
     @Autowired
     private UserService userService;
 

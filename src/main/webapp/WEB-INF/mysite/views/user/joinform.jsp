@@ -116,10 +116,10 @@
             <br>
             <strong style="color:cadetblue">
                 <%--${errors.getFieldError('email')}<br>--%>
-              <c:set var="errorEmail"
+              <c:set var="errorName"
                      value="${errors.getFieldError('email').codes[0]}"/>
               <spring:message
-                code="${errorEmail}"
+                code="${errorName}"
                 text="${errors.getFieldError('email').defaultMessage}"/>
             </strong>
           </c:if>
@@ -142,7 +142,6 @@
         </fieldset>
 
         <input type="submit" value="가입하기">
-
       </form>
     </div>
   </div>

@@ -20,7 +20,7 @@
         <p>퓨처스<br>
           지옥<br>
           번개<br>
-          <a href="/guestbook">방명록</a>에 글 남기기<br>
+          <a href="/mysite/guestbook">방명록</a>에 글 남기기<br>
         </p>
       </div>
     </div>

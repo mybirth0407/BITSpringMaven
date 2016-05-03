@@ -1,6 +1,5 @@
 package mysite.service;
 
-import mysite.config.Config;
 import mysite.dao.BoardDao;
 import mysite.vo.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static mysite.config.Config.N_LIST;
+import static mysite.config.Config.N_PAGE;
 
 @Service
 public class BoardService {
@@ -31,9 +33,9 @@ public class BoardService {
         long left = 1, right = 1;
         long startPage, lastPage;
         long searchResult = boardDao.searchCount(keyword);
-        long maxPage = searchResult / Config.N_LIST;
+        long maxPage = searchResult / N_LIST;
 
-        if (searchResult % Config.N_LIST != 0) {
+        if (searchResult % N_LIST != 0) {
             maxPage++;
         }
 
@@ -41,15 +43,15 @@ public class BoardService {
             page = 1L;
         }
 
-        long maxPageGroup = maxPage / Config.N_PAGE;
+        long maxPageGroup = maxPage / N_PAGE;
 
-        if (maxPage % Config.N_PAGE != 0) {
+        if (maxPage % N_PAGE != 0) {
             maxPageGroup++;
         }
 
-        long selectedPageGroup = page / Config.N_PAGE;
+        long selectedPageGroup = page / N_PAGE;
 
-        if (page % Config.N_PAGE != 0) {
+        if (page % N_PAGE != 0) {
             selectedPageGroup++;
         }
 
@@ -61,8 +63,8 @@ public class BoardService {
             right = 0;
         }
 
-        startPage = (selectedPageGroup - 1) * Config.N_PAGE + 1;
-        lastPage = (selectedPageGroup) * Config.N_PAGE;
+        startPage = (selectedPageGroup - 1) * N_PAGE + 1;
+        lastPage = (selectedPageGroup) * N_PAGE;
 
         if (lastPage > maxPage) {
             lastPage = maxPage;
@@ -75,8 +77,8 @@ public class BoardService {
         map.put("lastPage", lastPage);
         map.put("page", page);
         map.put("total", searchResult);
-        map.put("N_PAGE", Config.N_PAGE);
-        map.put("N_LIST", Config.N_LIST);
+        map.put("N_PAGE", N_PAGE);
+        map.put("N_LIST", N_LIST);
         return map;
     }
 

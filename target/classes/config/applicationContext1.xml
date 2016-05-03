@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="user1" class="springcontainer.main.User">
+    <constructor-arg value="둘리"/>
+  </bean>
+
+  <bean id="user2" class="springcontainer.main.User">
+    <constructor-arg index="0" value="둘리"/>
+    <constructor-arg index="1" value="asdf@g"/>
+  </bean>
+
+  <bean id="friend" class="springcontainer.main.Friend">
+    <constructor-arg value="말"/>
+  </bean>
+
+  <bean id="user3" class="springcontainer.main.User">
+    <constructor-arg index="0" value="둘리df"/>
+    <constructor-arg index="1" value="asdf@gdf"/>
+    <property name="friend" ref="friend"/>
+  </bean>
+
+  <bean id="user4" class="springcontainer.main.User">
+    <property name="name" value="길동"/>
+    <property name="email" value="asdg@asdg"/>
+    <property name="friend">
+      <bean id="heedongyee" class="springcontainer.main.Friend">
+        <constructor-arg value="희동이"/>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id="guest" class="springcontainer.main.Guest"/>
+  <bean id="guest2" class="springcontainer.main.Guest">
+    <property name="users">
+      <list>
+        <ref bean="user1"/>
+        <ref bean="user2"/>
+        <ref bean="user3"/>
+        <ref bean="user4"/>
+        <bean class="springcontainer.main.User">
+          <constructor-arg value="사용자5"/>
+        </bean>
+      </list>
+    </property>
+  </bean>
+</beans>
