@@ -1,5 +1,5 @@
 # BITSpringPractice
-BIT Spring maven in BITComputer during EstSoft futures, 3.2 ~ 5.31
+BIT Spring maven in BITComputer during Estsoft futures, 3.2 ~ 5.31
 
 Default Servlet, View Resolver, Exception,
 MyBatis,
