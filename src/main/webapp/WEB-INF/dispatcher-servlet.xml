@@ -17,7 +17,7 @@
   <mvc:annotation-driven>
     <mvc:message-converters>
       <bean
-          class="org.springframework.http.converter.StringHttpMessageConverter">
+        class="org.springframework.http.converter.StringHttpMessageConverter">
         <property name="supportedMediaTypes">
           <list>
             <value>text/html; charset=UTF-8</value>
@@ -25,7 +25,7 @@
         </property>
       </bean>
       <bean
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
           <list>
             <value>application/json; charset=UTF-8</value>
@@ -35,11 +35,20 @@
     </mvc:message-converters>
   </mvc:annotation-driven>
 
+  <!--<bean id="viewResolver"-->
+  <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+  <!--<property name="viewClass"-->
+  <!--value="org.springframework.web.servlet.view.JstlView"/>-->
+  <!--<property name="prefix" value="/WEB-INF/mysite/views/"/>-->
+  <!--<property name="suffix" value=".jsp"/>-->
+  <!--<property name="order" value="1"/>-->
+  <!--</bean>-->
+
   <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass"
               value="org.springframework.web.servlet.view.JstlView"/>
-    <property name="prefix" value="/WEB-INF/mysite/views/"/>
+    <property name="prefix" value="/WEB-INF/emaillist/"/>
     <property name="suffix" value=".jsp"/>
     <property name="order" value="1"/>
   </bean>
@@ -53,45 +62,45 @@
   <!--<context:component-scan-->
   <!--base-package="hellospring"/>-->
 
-  <!--<context:component-scan-->
-  <!--base-package="emaillist"/>-->
+  <context:component-scan
+    base-package="emaillist"/>
 
   <!--<context:component-scan-->
   <!--base-package="guestbook"/>-->
 
-  <context:component-scan
-      base-package="mysite"/>
+  <!--<context:component-scan-->
+  <!--base-package="mysite"/>-->
 
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/mysite/board/**"/>
-      <bean class="mysite.interceptor.MyInterceptor"/>
-    </mvc:interceptor>
-  </mvc:interceptors>
+  <!--<mvc:interceptors>-->
+  <!--<mvc:interceptor>-->
+  <!--<mvc:mapping path="/mysite/board/**"/>-->
+  <!--<bean class="mysite.interceptor.MyInterceptor"/>-->
+  <!--</mvc:interceptor>-->
+  <!--</mvc:interceptors>-->
 
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/mysite/guestbook/**"/>
-      <bean class="mysite.interceptor.MyInterceptor2"/>
-    </mvc:interceptor>
-  </mvc:interceptors>
+  <!--<mvc:interceptors>-->
+  <!--<mvc:interceptor>-->
+  <!--<mvc:mapping path="/mysite/guestbook/**"/>-->
+  <!--<bean class="mysite.interceptor.MyInterceptor2"/>-->
+  <!--</mvc:interceptor>-->
+  <!--</mvc:interceptors>-->
 
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/mysite/user/login"/>
-      <bean class="mysite.interceptor.AuthLoginInterceptor"/>
-    </mvc:interceptor>
-  </mvc:interceptors>
+  <!--<mvc:interceptors>-->
+  <!--<mvc:interceptor>-->
+  <!--<mvc:mapping path="/mysite/user/login"/>-->
+  <!--<bean class="mysite.interceptor.AuthLoginInterceptor"/>-->
+  <!--</mvc:interceptor>-->
+  <!--</mvc:interceptors>-->
 
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/mysite/user/logout"/>
-      <bean class="mysite.interceptor.AuthLogoutInterceptor"/>
-    </mvc:interceptor>
-  </mvc:interceptors>
+  <!--<mvc:interceptors>-->
+  <!--<mvc:interceptor>-->
+  <!--<mvc:mapping path="/mysite/user/logout"/>-->
+  <!--<bean class="mysite.interceptor.AuthLogoutInterceptor"/>-->
+  <!--</mvc:interceptor>-->
+  <!--</mvc:interceptors>-->
 
   <bean id="messageSource"
-    class="org.springframework.context.support.ResourceBundleMessageSource">
+        class="org.springframework.context.support.ResourceBundleMessageSource">
     <property name="basenames">
       <list>
         <value>messages.messages</value>

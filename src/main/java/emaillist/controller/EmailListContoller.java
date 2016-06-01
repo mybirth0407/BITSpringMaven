@@ -53,11 +53,12 @@ public class EmailListContoller {
 
     @RequestMapping("/emaillist/index2")
     public ModelAndView index2() {
+        System.out.println("ASDFASDF");
         List<EmailListVo> list = emailListDao.getList();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("list", list);
         modelAndView.setViewName("/WEB-INF/emaillist/views/index.jsp");
         return modelAndView;
-    }
+}
 }
